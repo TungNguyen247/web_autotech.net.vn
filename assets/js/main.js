@@ -467,4 +467,29 @@
     });
   }
 
+  // -------------------------------------------------------------------------
+  //  10. FAQ accordion
+  // -------------------------------------------------------------------------
+  var faqQuestions = document.querySelectorAll('.faq__question');
+  faqQuestions.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var answer = btn.parentElement.querySelector('.faq__answer');
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      // Close all other open items
+      faqQuestions.forEach(function (other) {
+        if (other !== btn && other.getAttribute('aria-expanded') === 'true') {
+          other.setAttribute('aria-expanded', 'false');
+          other.parentElement.querySelector('.faq__answer').hidden = true;
+        }
+      });
+      if (isOpen) {
+        btn.setAttribute('aria-expanded', 'false');
+        answer.hidden = true;
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        answer.hidden = false;
+      }
+    });
+  });
+
 })();
