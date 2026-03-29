@@ -125,7 +125,7 @@
   // Highlight active nav link based on scroll position
   function updateActiveLink() {
     var sections = document.querySelectorAll('section[id]');
-    var scrollPos = window.scrollY + var_navbarHeight() + 10;
+    var scrollPos = window.scrollY + getNavbarHeight() + 10;
 
     sections.forEach(function (section) {
       var top    = section.offsetTop;
@@ -143,7 +143,7 @@
     });
   }
 
-  function var_navbarHeight() {
+  function getNavbarHeight() {
     return navbar ? navbar.offsetHeight : 70;
   }
 
@@ -202,7 +202,7 @@
       var target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        var offset = var_navbarHeight() + 8;
+        var offset = getNavbarHeight() + 8;
         var top    = target.getBoundingClientRect().top + window.scrollY - offset;
 
         window.scrollTo({ top: top, behavior: 'smooth' });
