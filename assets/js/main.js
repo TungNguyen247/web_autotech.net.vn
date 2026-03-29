@@ -419,4 +419,39 @@
      ========================================================================= */
   setTimeout(handleAOS, 100);
 
+  /* =========================================================================
+     9. EasyDrive accordion (Inverter card)
+     ========================================================================= */
+  var accordionToggle = document.querySelector('.easydrive-accordion__toggle');
+  var accordionBody   = document.getElementById('easydrive-models');
+
+  if (accordionToggle && accordionBody) {
+    accordionToggle.addEventListener('click', function () {
+      var isOpen = accordionToggle.getAttribute('aria-expanded') === 'true';
+      var span   = accordionToggle.querySelector('span');
+
+      if (isOpen) {
+        accordionToggle.setAttribute('aria-expanded', 'false');
+        accordionBody.hidden = true;
+        if (span) {
+          span.setAttribute('data-vi', 'Xem danh sách model');
+          span.setAttribute('data-en', 'View Model List');
+          span.textContent = document.documentElement.lang === 'en'
+            ? 'View Model List'
+            : 'Xem danh sách model';
+        }
+      } else {
+        accordionToggle.setAttribute('aria-expanded', 'true');
+        accordionBody.hidden = false;
+        if (span) {
+          span.setAttribute('data-vi', 'Thu gọn');
+          span.setAttribute('data-en', 'Collapse');
+          span.textContent = document.documentElement.lang === 'en'
+            ? 'Collapse'
+            : 'Thu gọn';
+        }
+      }
+    });
+  }
+
 })();
