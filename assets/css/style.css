@@ -891,7 +891,154 @@ select {
 }
 
 /* --------------------------------------------------------------------------
-   10. Contact Section
+   10. Download Section
+   -------------------------------------------------------------------------- */
+.download__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.download__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  flex-wrap: wrap;
+}
+
+.download__item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.download__icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6C3CE1, #1A73E8);
+  border-radius: var(--radius-lg);
+  color: white;
+  font-size: 1.4rem;
+}
+
+.download__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.download__info h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: 4px;
+}
+
+.download__info p {
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+.download__meta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.download__btn {
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   11. FAQ Section
+   -------------------------------------------------------------------------- */
+.faq__list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.faq__item {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+}
+
+.faq__item:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.faq__question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  transition: color 0.2s ease;
+}
+
+.faq__question:hover {
+  color: var(--color-primary);
+}
+
+.faq__question[aria-expanded="true"] {
+  color: var(--color-primary);
+}
+
+.faq__icon {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+  color: var(--color-gray-400);
+}
+
+.faq__question[aria-expanded="true"] .faq__icon {
+  transform: rotate(180deg);
+  color: var(--color-primary);
+}
+
+.faq__answer {
+  padding: 0 var(--spacing-xl) var(--spacing-lg);
+  animation: accordion-open 0.25s ease;
+}
+
+.faq__answer p {
+  font-size: 0.95rem;
+  color: var(--color-gray-600);
+  line-height: 1.75;
+}
+
+/* --------------------------------------------------------------------------
+   12. Contact Section
    -------------------------------------------------------------------------- */
 .contact__grid {
   display: grid;
