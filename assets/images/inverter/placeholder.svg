@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f1f3f8"/>
+  <rect x="150" y="80" width="100" height="140" rx="8" fill="#6C3CE1" opacity="0.2"/>
+  <rect x="165" y="95" width="70" height="10" rx="4" fill="#6C3CE1" opacity="0.4"/>
+  <rect x="165" y="115" width="70" height="60" rx="4" fill="#1A73E8" opacity="0.3"/>
+  <circle cx="175" cy="185" r="8" fill="#6C3CE1" opacity="0.4"/>
+  <circle cx="200" cy="185" r="8" fill="#6C3CE1" opacity="0.4"/>
+  <circle cx="225" cy="185" r="8" fill="#6C3CE1" opacity="0.4"/>
+  <text x="200" y="245" font-family="Inter,sans-serif" font-size="14" fill="#9aa3b5" text-anchor="middle">EasyDrive Inverter</text>
+  <text x="200" y="265" font-family="Inter,sans-serif" font-size="12" fill="#9aa3b5" text-anchor="middle">Image placeholder</text>
+</svg>
