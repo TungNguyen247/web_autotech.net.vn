@@ -744,8 +744,102 @@ select {
 }
 
 /* --------------------------------------------------------------------------
-   9. Why Choose Us Section
+   Product Sub-panel Accordion
    -------------------------------------------------------------------------- */
+.product-card__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-block: var(--spacing-sm);
+  background: linear-gradient(135deg, rgba(123, 44, 191, 0.07), rgba(59, 130, 246, 0.07));
+  border: 1px solid rgba(123, 44, 191, 0.2);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-purple);
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.product-card__toggle:hover {
+  background: linear-gradient(135deg, rgba(123, 44, 191, 0.14), rgba(59, 130, 246, 0.14));
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.product-card__toggle[aria-expanded="true"] {
+  background: var(--gradient);
+  color: #fff;
+  border-color: transparent;
+}
+
+.product-card__sub-panel {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.product-card__sub-panel.is-open {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.sub-brand {
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #f8f9fa;
+  border-left: 3px solid transparent;
+  border-image: var(--gradient) 1;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.sub-brand__name {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-gray-800);
+  margin-bottom: var(--spacing-xs);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.sub-brand__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0;
+  list-style: none;
+}
+
+.sub-brand__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.375rem;
+  padding: 0.25rem var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.sub-brand__item:hover {
+  background: rgba(123, 44, 191, 0.06);
+}
+
+.sub-brand__model {
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-purple);
+  white-space: nowrap;
+}
+
+.sub-brand__desc {
+  color: #666;
+  font-size: 0.82rem;
+}
+
+
 .why__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

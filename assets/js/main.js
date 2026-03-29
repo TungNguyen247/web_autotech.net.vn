@@ -419,4 +419,44 @@
      ========================================================================= */
   setTimeout(handleAOS, 100);
 
+  /* =========================================================================
+     9. Accordion toggle for product sub-panels
+     ========================================================================= */
+  document.querySelectorAll('.product-card__toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel  = btn.nextElementSibling;
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      if (!isOpen) {
+        /* Opening: remove hidden first, then on next frame add is-open to trigger transition */
+        panel.hidden = false;
+        requestAnimationFrame(function () {
+          panel.classList.add('is-open');
+        });
+      } else {
+        /* Closing: remove is-open (transition runs), set hidden after transition ends */
+        panel.classList.remove('is-open');
+        panel.addEventListener('transitionend', function handler() {
+          panel.hidden = true;
+          panel.removeEventListener('transitionend', handler);
+        });
+      }
+
+      var textEl = btn.querySelector('.product-card__toggle-text');
+      if (textEl) {
+        if (!isOpen) {
+          textEl.setAttribute('data-vi', 'Thu gọn ▲');
+          textEl.setAttribute('data-en', 'Collapse ▲');
+        } else {
+          textEl.setAttribute('data-vi', 'Xem danh sách sản phẩm ▼');
+          textEl.setAttribute('data-en', 'View Product List ▼');
+        }
+        /* Sync with active language */
+        var activeLang = document.documentElement.lang || 'vi';
+        textEl.textContent = textEl.getAttribute('data-' + activeLang) || textEl.textContent;
+      }
+    });
+  });
+
 })();
