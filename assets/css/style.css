@@ -1246,3 +1246,99 @@ select {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== PRODUCT SUB-PANEL (ACCORDION) ===== */
+.product-card__toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  margin-top: 12px;
+  background: linear-gradient(135deg, rgba(108,60,225,0.08), rgba(26,115,232,0.08));
+  border: 1.5px solid rgba(108,60,225,0.25);
+  border-radius: 8px;
+  color: #6C3CE1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.product-card__toggle:hover {
+  background: linear-gradient(135deg, rgba(108,60,225,0.15), rgba(26,115,232,0.15));
+  border-color: #6C3CE1;
+}
+.product-card__sub-panel {
+  margin-top: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e8e0f8;
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.sub-brand {
+  padding: 14px 16px;
+  background: #faf8ff;
+}
+.sub-brand__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(108,60,225,0.2);
+}
+.sub-brand__logo {
+  height: 28px;
+  object-fit: contain;
+}
+.sub-brand__name {
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6C3CE1, #1A73E8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+.sub-brand__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sub-brand__item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+}
+.sub-brand__item:hover {
+  background: rgba(108,60,225,0.06);
+  border-left-color: #6C3CE1;
+}
+.sub-brand__model {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1A73E8;
+}
+.sub-brand__desc {
+  font-size: 0.82rem;
+  color: #666;
+  margin-top: 2px;
+}
+.sub-brand__note {
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+  padding: 8px 16px 12px;
+  background: #faf8ff;
+  margin: 0;
+}

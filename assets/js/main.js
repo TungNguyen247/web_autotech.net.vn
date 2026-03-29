@@ -420,3 +420,25 @@
   setTimeout(handleAOS, 100);
 
 })();
+
+// ===== PRODUCT SUB-PANEL ACCORDION =====
+document.querySelectorAll('.product-card__toggle').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var panel = btn.nextElementSibling;
+    var isOpen = btn.getAttribute('aria-expanded') === 'true';
+    var currentLang = document.documentElement.getAttribute('data-lang') || 'vi';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    panel.hidden = isOpen;
+    var textEl = btn.querySelector('.product-card__toggle-text');
+    if (!isOpen) {
+      textEl.setAttribute('data-vi', 'Thu gọn ▲');
+      textEl.setAttribute('data-en', 'Collapse ▲');
+      // Cập nhật nội dung hiển thị theo ngôn ngữ hiện tại
+      textEl.textContent = currentLang === 'en' ? 'Collapse ▲' : 'Thu gọn ▲';
+    } else {
+      textEl.setAttribute('data-vi', 'Xem danh sách model ▼');
+      textEl.setAttribute('data-en', 'View Model List ▼');
+      textEl.textContent = currentLang === 'en' ? 'View Model List ▼' : 'Xem danh sách model ▼';
+    }
+  });
+});
