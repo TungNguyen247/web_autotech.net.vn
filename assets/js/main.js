@@ -48,21 +48,34 @@
       }
     }
 
-    // Update page title and meta description for SEO
-    if (lang === 'vi') {
-      document.title = 'Autotech - Công nghệ Tự động hóa & Biến tần';
-      var metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content',
-          'Autotech - Công ty chuyên cung cấp biến tần, PLC, HMI và giải pháp tự động hóa dây chuyền chuyên nghiệp tại Việt Nam');
+    // Update page title and meta description for SEO (page-aware)
+    var pageTitles = {
+      'inverter.html': {
+        vi: 'Biến tần (Inverter) - Autotech',
+        en: 'Inverter (VFD) - Autotech'
+      },
+      'index.html': {
+        vi: 'Autotech - Công nghệ Tự động hóa & Biến tần',
+        en: 'Autotech - Professional Automation Technology & Inverter Solutions'
       }
-    } else {
-      document.title = 'Autotech - Professional Automation Technology & Inverter Solutions';
-      var metaDescEn = document.querySelector('meta[name="description"]');
-      if (metaDescEn) {
-        metaDescEn.setAttribute('content',
-          'Autotech - Professional supplier of inverters, PLCs, HMIs and industrial automation solutions in Vietnam');
+    };
+    var pageDescs = {
+      'inverter.html': {
+        vi: 'Autotech cung cấp và lắp đặt biến tần chính hãng EasyDrive — đa dạng model từ 0.4kW đến 500kW, phù hợp mọi ứng dụng công nghiệp',
+        en: 'Autotech supplies and installs genuine EasyDrive inverters — wide range of models from 0.4kW to 500kW, suitable for all industrial applications'
+      },
+      'index.html': {
+        vi: 'Autotech - Công ty chuyên cung cấp biến tần, PLC, HMI và giải pháp tự động hóa dây chuyền chuyên nghiệp tại Việt Nam',
+        en: 'Autotech - Professional supplier of inverters, PLCs, HMIs and industrial automation solutions in Vietnam'
       }
+    };
+    var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    var titleMap = pageTitles[currentPage] || pageTitles['index.html'];
+    var descMap = pageDescs[currentPage] || pageDescs['index.html'];
+    document.title = titleMap[lang];
+    var metaDescEl = document.querySelector('meta[name="description"]');
+    if (metaDescEl) {
+      metaDescEl.setAttribute('content', descMap[lang]);
     }
 
     // Update form placeholders with translated text

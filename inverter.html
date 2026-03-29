@@ -525,11 +525,14 @@
       }
     };
 
+    var lastFocusedButton = null;
+
     document.querySelectorAll('.inv-card__detail-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var model = btn.getAttribute('data-model');
         var data = invData[model];
         if (!data) return;
+        lastFocusedButton = btn;
         var lang = document.documentElement.lang || 'vi';
         var name = lang === 'en' ? data.nameEN : data.nameVI;
         var desc = lang === 'en' ? data.descEN : data.descVI;
@@ -549,12 +552,17 @@
           '</a>';
         document.getElementById('invModal').removeAttribute('hidden');
         document.body.style.overflow = 'hidden';
+        document.getElementById('invModalClose').focus();
       });
     });
 
     function closeModal() {
       document.getElementById('invModal').setAttribute('hidden', '');
       document.body.style.overflow = '';
+      if (lastFocusedButton) {
+        lastFocusedButton.focus();
+        lastFocusedButton = null;
+      }
     }
 
     document.getElementById('invModalClose').addEventListener('click', closeModal);
