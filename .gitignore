@@ -1,0 +1,14 @@
+# PHP config (contains DB credentials)
+config/config.php
+
+# Uploaded files
+assets/uploads/*
+!assets/uploads/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
