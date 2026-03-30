@@ -1,0 +1,4 @@
+# Deny direct access to include files
+<FilesMatch "^(layout|layout_end)\.php$">
+    Require all denied
+</FilesMatch>

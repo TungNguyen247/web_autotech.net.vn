@@ -1,10 +1,7 @@
 # Autotech Website
 
 > Trang web chuyên nghiệp cho công ty **Autotech** — chuyên về công nghệ tự động hóa và biến tần.
-
-## 🌐 Demo
-
-Mở file `index.html` trong trình duyệt để xem trang web, hoặc triển khai lên GitHub Pages.
+> Hỗ trợ **PHP 8.x + MySQL (PDO)** với admin panel đầy đủ tính năng.
 
 ---
 
@@ -12,13 +9,42 @@ Mở file `index.html` trong trình duyệt để xem trang web, hoặc triển 
 
 ```
 web_autotech.net.vn/
-├── index.html              # Trang chính (single-page)
-├── assets/
-│   ├── css/
-│   │   └── style.css       # CSS chính (responsive, gradient tím-xanh)
-│   └── js/
-│       └── main.js         # JavaScript (ngôn ngữ, scroll, form, ...)
-└── README.md
+├── index.php               # Trang chủ động (PHP, thay thế index.html)
+├── index.html              # Giữ lại làm fallback
+├── contact_submit.php      # Xử lý form liên hệ (POST)
+├── inverter.html           # Trang biến tần
+├── .htaccess               # Apache: DirectoryIndex, bảo mật
+│
+├── config/
+│   ├── config.example.php  # Mẫu cấu hình (copy → config.php)
+│   └── config.php          # Cấu hình thực (gitignored, tự tạo)
+│
+├── includes/
+│   ├── db.php              # PDO singleton
+│   ├── auth.php            # Quản lý session admin
+│   ├── csrf.php            # CSRF token
+│   └── helpers.php         # Utilities (h(), redirect(), flash(), ...)
+│
+├── database/
+│   └── schema.sql          # Schema MySQL + seed dữ liệu mặc định
+│
+├── admin/
+│   ├── login.php           # Đăng nhập admin
+│   ├── logout.php          # Đăng xuất
+│   ├── index.php           # Dashboard
+│   ├── assets/
+│   │   └── admin.css       # CSS admin panel
+│   ├── includes/
+│   │   ├── layout.php      # Header + sidebar chung
+│   │   └── layout_end.php  # Footer chung
+│   ├── categories/         # CRUD danh mục
+│   ├── products/           # CRUD sản phẩm + upload ảnh
+│   └── contacts/           # Danh sách + xem + xóa liên hệ
+│
+└── assets/
+    ├── css/style.css       # CSS trang public
+    ├── js/main.js          # JS trang public
+    └── uploads/            # Ảnh sản phẩm upload (gitignored)
 ```
 
 ---
@@ -29,31 +55,93 @@ web_autotech.net.vn/
 |---|---|
 | 🇻🇳 / 🇺🇸 Đa ngôn ngữ | Chuyển đổi Tiếng Việt ↔ Tiếng Anh bằng một nút bấm |
 | 📱 Responsive | Hiển thị tốt trên mobile, tablet, desktop |
-| 🔍 Chuẩn SEO | Meta tags, Open Graph, heading hierarchy, alt text, canonical URL |
-| 🎨 Gradient tím-xanh | Giao diện hiện đại theo màu thương hiệu |
-| 🍔 Mobile menu | Hamburger menu cho màn hình nhỏ |
-| 🎞️ AOS Animation | Hiệu ứng fade khi scroll đến section |
-| 📝 Form validation | Kiểm tra dữ liệu form liên hệ theo thời gian thực |
-| ⬆️ Back to top | Nút quay về đầu trang |
-| 📌 Sticky navbar | Navbar cố định khi scroll, có shadow |
+| 🔍 Chuẩn SEO | Meta tags, Open Graph, heading hierarchy |
+| 🗄️ Admin panel | Đăng nhập bảo mật, CRUD sản phẩm/danh mục, xem liên hệ |
+| 🔒 Bảo mật | CSRF protection, prepared statements (PDO), password_hash |
+| 📤 Upload ảnh | jpg/png/webp, tối đa 5MB, validate MIME type |
+| 📝 Form liên hệ | Lưu vào MySQL, admin xem và quản lý |
 
 ---
 
-## 🚀 Triển khai lên GitHub Pages
+## 🚀 Hướng dẫn cài đặt (Shared Hosting / PA Việt Nam)
 
-1. Vào **Settings** của repository
-2. Chọn **Pages** ở menu bên trái
-3. Trong mục **Branch**, chọn `main` và thư mục `/ (root)`
-4. Nhấn **Save**
-5. Trang web sẽ có địa chỉ: `https://TungNguyen247.github.io/web_autotech.net.vn`
+### Bước 1 — Upload code lên hosting
+
+Upload toàn bộ thư mục lên `public_html` (hoặc thư mục website) qua FTP/File Manager.
+
+### Bước 2 — Tạo database MySQL
+
+1. Đăng nhập **cPanel** → **MySQL Databases**
+2. Tạo database mới, tạo user, gán quyền `ALL PRIVILEGES`
+3. Vào **phpMyAdmin**, chọn database vừa tạo, tab **SQL**
+4. Copy và chạy nội dung file `database/schema.sql`
+
+### Bước 3 — Cấu hình kết nối
+
+```bash
+cp config/config.example.php config/config.php
+```
+
+Mở `config/config.php` và điền thông tin thực:
+
+```php
+define('DB_HOST',    'localhost');
+define('DB_NAME',    'ten_database');
+define('DB_USER',    'ten_user');
+define('DB_PASS',    'mat_khau');
+define('APP_URL',    'https://autotech.net.vn');
+define('APP_ENV',    'production');
+define('SESSION_SECURE', true); // false nếu chưa có HTTPS
+```
+
+### Bước 4 — Đăng nhập admin lần đầu
+
+- URL: `https://yourdomain.com/admin/login.php`
+- Username mặc định: `admin`
+- Password mặc định: `Admin@2026`
+
+> ⚠️ **QUAN TRỌNG**: Đổi mật khẩu ngay sau lần đăng nhập đầu tiên!
+
+Để thay mật khẩu, chạy lệnh SQL sau trong phpMyAdmin:
+
+```sql
+UPDATE admin_users
+SET password_hash = '$2y$12$...' -- thay bằng hash từ password_hash()
+WHERE username = 'admin';
+```
+
+Hoặc tạo hash trong PHP:
+```php
+echo password_hash('MatKhauMoiCuaBan', PASSWORD_BCRYPT);
+```
+
+### Bước 5 — Kiểm tra
+
+- Trang chủ: `https://yourdomain.com/` (hoặc `index.php`)
+- Admin: `https://yourdomain.com/admin/`
 
 ---
 
-## ✏️ Cách chỉnh sửa thông tin
+## 🔧 Sử dụng Admin Panel
 
-### Thay thế thông tin liên hệ
+### Quản lý danh mục
+Vào **Admin → Danh mục** để thêm/sửa/xóa danh mục sản phẩm.
 
-Mở file `index.html` và tìm kiếm các placeholder sau, thay bằng thông tin thực:
+### Quản lý sản phẩm
+Vào **Admin → Sản phẩm** để:
+- Thêm sản phẩm mới với tên song ngữ, mô tả, giá và ảnh
+- Bật/tắt hiển thị sản phẩm trên trang chủ
+- Upload ảnh (jpg/png/webp, tối đa 5MB)
+
+### Xem tin nhắn liên hệ
+Vào **Admin → Liên hệ** để xem danh sách tin nhắn từ khách hàng.
+Nhấn vào tên để xem chi tiết (tin nhắn sẽ được đánh dấu đã đọc tự động).
+
+---
+
+## ✏️ Chỉnh sửa thông tin liên hệ
+
+Mở `index.php` và tìm các placeholder sau:
 
 | Placeholder | Thay bằng |
 |---|---|
@@ -61,34 +149,26 @@ Mở file `index.html` và tìm kiếm các placeholder sau, thay bằng thông 
 | `[Số điện thoại]` | Số điện thoại thực |
 | `[Email]` | Địa chỉ email thực |
 
-### Thay đổi màu sắc
-
-Mở `assets/css/style.css`, tìm phần `:root` ở đầu file:
-
-```css
-:root {
-  --color-purple: #6C3CE1;  /* Màu tím chính */
-  --color-blue:   #1A73E8;  /* Màu xanh chính */
-}
-```
-
-### Thêm/sửa nội dung song ngữ
-
-Mỗi phần tử có nội dung song ngữ đều dùng thuộc tính `data-vi` và `data-en`:
-
-```html
-<span data-vi="Trang chủ" data-en="Home">Trang chủ</span>
-```
-
 ---
 
 ## 🛠️ Công nghệ sử dụng
 
-- **HTML5** — Cấu trúc trang, semantic tags
-- **CSS3** — Responsive design, CSS variables, flexbox, grid, gradient
-- **JavaScript** (thuần, không framework) — Tương tác, ngôn ngữ, animation
+- **PHP 8.x** — Backend, PDO, session
+- **MySQL** — Database
+- **HTML5 / CSS3 / JavaScript** (thuần) — Frontend
 - **Font Awesome 6** — Icons (CDN)
 - **Google Fonts** — Inter font (CDN)
+
+---
+
+## 🔒 Bảo mật
+
+- Mật khẩu admin được hash bằng `password_hash()` (bcrypt)
+- Tất cả query dùng PDO prepared statements (chống SQL injection)
+- CSRF token trên mọi form POST
+- Input được validate và sanitize server-side
+- `config/config.php` và `assets/uploads/*` được gitignore
+- Header bảo mật cơ bản trong `.htaccess`
 
 ---
 

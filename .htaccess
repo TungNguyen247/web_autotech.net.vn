@@ -1,0 +1,55 @@
+# ================================================================
+# Autotech .htaccess — Apache configuration for shared hosting
+# ================================================================
+
+# Prefer index.php over index.html
+DirectoryIndex index.php index.html
+
+# ----------------------------------------------------------------
+# Security: deny direct access to sensitive files
+# ----------------------------------------------------------------
+<FilesMatch "(config\.php|\.gitignore|composer\.lock|composer\.json|package\.json|package-lock\.json)$">
+    Require all denied
+</FilesMatch>
+
+# Deny access to entire config directory
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block access to config/config.php
+    RewriteRule ^config/config\.php$ - [F,L]
+
+    # Block access to includes/ PHP files directly
+    RewriteRule ^includes/ - [F,L]
+
+    # Block directory listing
+    Options -Indexes
+</IfModule>
+
+# ----------------------------------------------------------------
+# Disable directory listing (belt-and-suspenders)
+# ----------------------------------------------------------------
+Options -Indexes
+
+# ----------------------------------------------------------------
+# Charset & MIME types
+# ----------------------------------------------------------------
+AddDefaultCharset UTF-8
+
+# ----------------------------------------------------------------
+# Security headers (basic)
+# ----------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ----------------------------------------------------------------
+# PHP error display (production — hide errors from visitors)
+# ----------------------------------------------------------------
+<IfModule mod_php.c>
+    php_flag display_errors Off
+    php_flag log_errors On
+</IfModule>
