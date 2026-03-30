@@ -52,7 +52,7 @@ require __DIR__ . '/../includes/layout.php';
         <td><?= h((string)$p['id']) ?></td>
         <td>
           <?php if ($p['image_path']): ?>
-          <img src="../../<?= h($p['image_path']) ?>" alt="" class="img-preview">
+          <img src="/<?= h($p['image_path']) ?>" alt="" class="img-preview">
           <?php else: ?>
           <span style="color:#ccc;font-size:1.5rem;"><i class="fas fa-image"></i></span>
           <?php endif; ?>

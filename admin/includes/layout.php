@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/admin.css">
+  <link rel="stylesheet" href="/admin/assets/admin.css">
 </head>
 <body>
 
@@ -29,7 +29,7 @@
 <header class="admin-topbar">
   <span class="admin-topbar__logo">⚙️ Autotech Admin</span>
   <span class="admin-topbar__user"><i class="fas fa-user-circle"></i> <?= h(current_admin()) ?></span>
-  <a href="../logout.php" class="admin-topbar__logout">
+  <a href="/admin/logout.php" class="admin-topbar__logout">
     <i class="fas fa-sign-out-alt"></i> Đăng xuất
   </a>
 </header>
@@ -39,27 +39,27 @@
 <nav class="admin-sidebar" aria-label="Admin navigation">
   <div class="admin-sidebar__nav">
     <span class="admin-sidebar__label">Tổng quan</span>
-    <a href="../index.php"
+    <a href="/admin/index.php"
        class="admin-sidebar__link <?= $active === 'dashboard' ? 'active' : '' ?>">
       <i class="fas fa-tachometer-alt"></i> Dashboard
     </a>
 
     <span class="admin-sidebar__label">Quản lý</span>
-    <a href="../categories/index.php"
+    <a href="/admin/categories/index.php"
        class="admin-sidebar__link <?= $active === 'categories' ? 'active' : '' ?>">
       <i class="fas fa-tags"></i> Danh mục
     </a>
-    <a href="../products/index.php"
+    <a href="/admin/products/index.php"
        class="admin-sidebar__link <?= $active === 'products' ? 'active' : '' ?>">
       <i class="fas fa-box-open"></i> Sản phẩm
     </a>
-    <a href="../contacts/index.php"
+    <a href="/admin/contacts/index.php"
        class="admin-sidebar__link <?= $active === 'contacts' ? 'active' : '' ?>">
       <i class="fas fa-envelope"></i> Liên hệ
     </a>
 
     <span class="admin-sidebar__label">Website</span>
-    <a href="../../index.php" class="admin-sidebar__link" target="_blank">
+    <a href="/index.php" class="admin-sidebar__link" target="_blank">
       <i class="fas fa-external-link-alt"></i> Xem trang chủ
     </a>
   </div>

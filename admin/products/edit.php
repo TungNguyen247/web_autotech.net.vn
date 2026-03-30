@@ -176,7 +176,7 @@ require __DIR__ . '/../includes/layout.php';
       <div class="form-group">
         <label>Ảnh hiện tại</label>
         <?php if (!empty($input['image_path'])): ?>
-        <img src="../../<?= h($input['image_path']) ?>" alt="" class="img-preview" style="display:block;margin-bottom:.5rem;">
+        <img src="/<?= h($input['image_path']) ?>" alt="" class="img-preview" style="display:block;margin-bottom:.5rem;">
         <label style="display:flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:400;">
           <input type="checkbox" name="remove_image" value="1"> Xóa ảnh này
         </label>
